@@ -4,5 +4,6 @@ public class Test{
         System.out.print("Welcome!");
         System.out.print("Christmas is coming!");
         System.out.print("Hello there!");
+        System.out.print("Good day!");
     }
 }
