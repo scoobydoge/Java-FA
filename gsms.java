@@ -179,11 +179,13 @@ class Administrator extends Staff{
 		
 		System.out.print("Item stock: ");
 		itemstock = input.nextInt();
+
     }
 
 
     public void editGrocery(){            
 		Scanner input = new Scanner(System.in);
+
 		System.out.print("Edit\n1.Name\n2.Detail\n3.Location\n4.Price\n5.Stock\nYour input: ");
 		int x = input.nextInt();
 		switch(x){
@@ -259,6 +261,7 @@ class gsms{
 				int x = input.nextInt();
 
 				if(x == staff[counter].staffid){
+				//a1 = staff[counter];
 				a1.editStaff();
 				staff[counter] = a1;
                 }
@@ -335,12 +338,12 @@ class gsms{
 			else if(choice == 11){
 				Administrator a1 = new Administrator();
 				
-				System.out.print("Enter grocery id to edit: ");
+				System.out.print("Enter grocery no.: ");
 				int x = input.nextInt();
 				
-				a1 = item[x];
-				a1.editGrocery();
 				item[x] = a1;
+				a1.editGrocery();
+				//item[x] = a1;
 				
 			}
 			
