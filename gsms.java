@@ -28,7 +28,7 @@ class Grocery{
 }
 
 class Sales extends Grocery{
-	Sales[] sales = new Sales[5000];
+	int[] sales = new int[5000];
 	Scanner input = new Scanner(System.in);
 
 	public void recordSales(int x){            
@@ -159,16 +159,6 @@ class Administrator extends Staff{
 			System.out.println("Invalid input");
 		}
 	}
-
-    public void deleteStaff(){
-             name = null;
-             userid = null;
-             shift = null;
-             userpassword = null;
-             salary = 0;
-
-             System.out.println("Staff deleted.");
-    }
 	
 	public void addGrocery(int id){            
 		itemid = id;
@@ -221,10 +211,8 @@ class Administrator extends Staff{
 			itemstock= input.nextInt();
 			
 			default:
-			System.out.println("Invalid input");
-			
+			System.out.println("Invalid input");	
 		}
-		
     }
 }
 
@@ -232,15 +220,15 @@ class gsms{
 	static Staff[] staff = new Staff[20];
     static Grocery[] item = new Grocery[100];
 	static int counter=0;
-	int salescounter=0; 
-	int grocerycounter=0;
+	static int salescounter=0; 
+	static int grocerycounter=0;
     
 	public static void main(String args[]) {
-        Sales sales = new Sales();
+
         Scanner input = new Scanner(System.in);
 
-        String username = "admin";
-        String password = "1234";
+        String username;
+        String password;
 
         System.out.print("Enter user type [staff|admin]:");
         String user_type = input.nextLine();
@@ -252,7 +240,7 @@ class gsms{
             System.out.println("Enter your password: ");
             password = input.nextLine();
 
-            if(username == "admin" && password == "1234"){
+            if(username.equals("admin") && password.equals("1234")){
 
             System.out.print("1.Add staff\n2.Edit staff\n3.Delete staff\n4.View staff's shift\n5.List all staff\n6.Record sales\n7.Edit sales\n8.View all sales\n9.Generate report of sales\n10.Add grocery item\n11.Edit grocery detail\n12.View grocery item details\n13.Generate report of grocery items\n\nYour input: ");
 			int choice = input.nextInt();
@@ -282,7 +270,8 @@ class gsms{
                 int y = input.nextInt();
 
                 if(y == staff[counter].staffid){
-                    a1.deleteStaff();
+                    staff[counter] = null;
+					System.out.println("Staff deleted.");
                     staff[counter] = a1;
                 }
 
@@ -292,7 +281,6 @@ class gsms{
 			}
 			
 			else if(choice == 4){
-				Administrator a1 = new Administrator();
                 System.out.println("Enter staff no.: ");
 				int z = input.nextInt();
 				System.out.println("Name:" + staff[z].name);
@@ -301,7 +289,6 @@ class gsms{
 			}
 		
             else if(choice == 5){
-               Administrator a1 = new Administrator();
 			   System.out.println("Staff's List");
 			   System.out.println("------------");	   
 			   for(int i=0;i<20;i++){
@@ -346,13 +333,14 @@ class gsms{
 			}
 			
 			else if(choice == 11){
-				Scanner input = new Scanner(System.in);
 				Administrator a1 = new Administrator();
 				
 				System.out.print("Enter grocery id to edit: ");
 				int x = input.nextInt();
 				
-				a1.editGrocery(x);
+				a1 = item[x];
+				a1.editGrocery();
+				item[x] = a1;
 				
 			}
 			
@@ -386,30 +374,29 @@ class gsms{
             String userpassword = input.nextLine();
 
             for(int i=0; i<20; i++){
-                if(userID == staff[i].staffid && password == staff[i].userpassword){
+                if(userID == staff[i].staffid && userpassword == staff[i].userpassword){
                     System.out.print("1.View shift\n2.View grocery item details\n3.Generate report of grocery items\n4.Record sales\nYour Input: ");
 			        int choice = input.nextInt();
 
                     if(choice == 1){
-                        for(int i=0;i<staff.length;i++){
-                        staff[i].viewshift();
+                        for(i=0;i<staff.length;i++){
+                        staff[i].viewShift();
                         }
                     }
                     
                     else if(choice == 2){
-                        Scanner input = new Scanner(System.in);
                         System.out.print("Enter grocery id that you want to view: ");
                         int x = input.nextInt();
                         item[x].viewGroceryDetails();
                     }
                     
                     else if(choice == 3){
-                        for(int i=0;i<item.length;i++)
+                        for(i=0;i<item.length;i++)
                         item[i].generateGroceryReport();
                         
                     }
                     
-                    else if(choice == 4({
+                    else if(choice == 4){
 						Staff s1 = new Staff();
                         s1.recordSales(salescounter);
                         salescounter++;        
